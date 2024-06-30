@@ -1,0 +1,7 @@
+F:\PoltekSSN\Pemrograman Dekstop\ProjectApp\ProjectApp\bin\Release\net8.0-windows\publish\ProjectApp.exe
+F:\PoltekSSN\Pemrograman Dekstop\ProjectApp\ProjectApp\bin\Release\net8.0-windows\publish\ProjectApp.dll
+F:\PoltekSSN\Pemrograman Dekstop\ProjectApp\ProjectApp\bin\Release\net8.0-windows\publish\ProjectApp.deps.json
+F:\PoltekSSN\Pemrograman Dekstop\ProjectApp\ProjectApp\bin\Release\net8.0-windows\publish\ProjectApp.runtimeconfig.json
+F:\PoltekSSN\Pemrograman Dekstop\ProjectApp\ProjectApp\bin\Release\net8.0-windows\publish\ProjectApp.dll.config
+F:\PoltekSSN\Pemrograman Dekstop\ProjectApp\ProjectApp\bin\Release\net8.0-windows\publish\ProjectApp.pdb
+F:\PoltekSSN\Pemrograman Dekstop\ProjectApp\ProjectApp\bin\Release\net8.0-windows\publish\Newtonsoft.Json.dll
