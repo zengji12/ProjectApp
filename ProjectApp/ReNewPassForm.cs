@@ -12,18 +12,12 @@ namespace ProjectApp
 {
 	public partial class ReNewPassForm : Form
 	{
-		private static readonly HttpClientHandler handler = new HttpClientHandler()
-		{
-			// Bypass SSL certificate validation
-			ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
-		};
-
 		private readonly HttpClient client;
 
 		public ReNewPassForm()
 		{
 			InitializeComponent();
-			client = new HttpClient(handler);
+			client = new HttpClient();
 		}
 
 		private async void submitPass_Click(object sender, EventArgs e)
@@ -46,7 +40,7 @@ namespace ProjectApp
 				var values = new { password = oldPass, newPassword = newPass };
 				var content = new StringContent(JsonConvert.SerializeObject(values), Encoding.UTF8, "application/json");
 
-				HttpResponseMessage response = await client.PostAsync("https://localhost:8443/api/auth/changePassword", content);
+				HttpResponseMessage response = await client.PostAsync("https://app-api.korpstar-poltekssn.org/api/auth/changePassword", content);
 
 				response.EnsureSuccessStatusCode();
 

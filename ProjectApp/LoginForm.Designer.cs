@@ -33,6 +33,7 @@ namespace ProjectApp
 			label2 = new Label();
 			usernameTxt = new TextBox();
 			passwordTxt = new TextBox();
+			welcome = new Label();
 			SuspendLayout();
 			// 
 			// label1
@@ -83,11 +84,22 @@ namespace ProjectApp
 			passwordTxt.Size = new Size(184, 39);
 			passwordTxt.TabIndex = 4;
 			// 
+			// welcome
+			// 
+			welcome.AutoSize = true;
+			welcome.Font = new Font("Segoe UI", 34F);
+			welcome.Location = new Point(283, 34);
+			welcome.Name = "welcome";
+			welcome.Size = new Size(215, 62);
+			welcome.TabIndex = 5;
+			welcome.Text = "Welcome";
+			// 
 			// LoginForm
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(800, 450);
+			Controls.Add(welcome);
 			Controls.Add(passwordTxt);
 			Controls.Add(usernameTxt);
 			Controls.Add(label2);
@@ -106,5 +118,6 @@ namespace ProjectApp
 		private Label label2;
 		private TextBox usernameTxt;
 		private TextBox passwordTxt;
+		private Label welcome;
 	}
 }

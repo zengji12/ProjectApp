@@ -7,16 +7,11 @@ namespace ProjectApp
 {
 	public partial class OptionsForm : Form
 	{
-		private static readonly HttpClientHandler handler = new HttpClientHandler()
-		{
-			// Bypass SSL certificate validation
-			ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
-		};
 		private HttpClient client;
 		public OptionsForm()
 		{
 			InitializeComponent();
-			client = new HttpClient(handler);
+			client = new HttpClient();
 		}
 
 		private async void deleteMeButton_Click_1(object sender, EventArgs e)
@@ -37,7 +32,7 @@ namespace ProjectApp
 
 					client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-					HttpResponseMessage response = await client.PostAsync("https://localhost:8443/api/user/delete", null);
+					HttpResponseMessage response = await client.PostAsync("https://app-api.korpstar-poltekssn.org/api/user/delete", null);
 
 					if (response.IsSuccessStatusCode)
 					{

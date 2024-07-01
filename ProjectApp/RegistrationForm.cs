@@ -10,17 +10,12 @@ namespace ProjectApp
 {
 	public partial class RegistrationForm : Form
 	{
-		private static readonly HttpClientHandler handler = new HttpClientHandler()
-		{
-			// Bypass SSL certificate validation
-			ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
-		};
 		private HttpClient client;
 
 		public RegistrationForm()
 		{
 			InitializeComponent();
-			client = new HttpClient(handler);
+			client = new HttpClient();
 		}
 
 		private async void buttonRegister_Click(object sender, EventArgs e)
@@ -42,6 +37,12 @@ namespace ProjectApp
 				string password = passwordTxt.Text;
 				string alamat = alamatTxt.Text;
 
+				if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(name) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(alamat))
+				{
+					MessageBox.Show("All fields are required.");
+					return;
+				}
+
 				// Buat objek berisi data untuk dikirimkan ke API
 				var values = new
 				{
@@ -54,7 +55,7 @@ namespace ProjectApp
 
 				var content = new StringContent(JsonConvert.SerializeObject(values), Encoding.UTF8, "application/json");
 				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-				HttpResponseMessage response = await client.PostAsync("https://localhost:8443/api/user/register", content);
+				HttpResponseMessage response = await client.PostAsync("https://app-api.korpstar-poltekssn.org/api/user/register", content);
 
 				if (response.IsSuccessStatusCode)
 				{

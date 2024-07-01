@@ -10,12 +10,7 @@ namespace ProjectApp
 {
 	public partial class LoginForm : Form
 	{
-		private static readonly HttpClientHandler handler = new HttpClientHandler()
-		{
-			// Bypass SSL certificate validation
-			ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
-		};
-		private static readonly HttpClient client = new HttpClient(handler);
+		private static readonly HttpClient client = new HttpClient();
 
 		public LoginForm()
 		{
@@ -49,7 +44,7 @@ namespace ProjectApp
 			try
 			{
 				var content = new StringContent(JsonConvert.SerializeObject(new { username, password }), Encoding.UTF8, "application/json");
-				HttpResponseMessage response = await client.PostAsync("https://localhost:8443/api/auth/signin", content);
+				HttpResponseMessage response = await client.PostAsync("https://app-api.korpstar-poltekssn.org/api/auth/signin", content);
 
 				response.EnsureSuccessStatusCode();
 				string responseBody = await response.Content.ReadAsStringAsync();

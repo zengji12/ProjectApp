@@ -11,11 +11,6 @@ namespace ProjectApp
 {
 	public partial class DashboardForm : Form
 	{
-		private static readonly HttpClientHandler handler = new HttpClientHandler()
-		{
-			// Bypass SSL certificate validation
-			ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
-		};
 		private string fullname;
 		private HttpClient client;
 		private bool isAdmin;
@@ -24,7 +19,7 @@ namespace ProjectApp
 		{
 			InitializeComponent();
 			this.fullname = fullname;
-			client = new HttpClient(handler);
+			client = new HttpClient();
 			isAdmin = false;
 		}
 
@@ -51,7 +46,7 @@ namespace ProjectApp
 
 				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-				var response = await client.PostAsync("https://localhost:8443/api/user/getkey", null);
+				var response = await client.PostAsync("https://app-api.korpstar-poltekssn.org/api/user/getkey", null);
 
 				response.EnsureSuccessStatusCode();
 
@@ -93,7 +88,7 @@ namespace ProjectApp
 
 				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-				var response = await client.PostAsync("https://localhost:8443/api/auth/isadmin", null);
+				var response = await client.PostAsync("https://app-api.korpstar-poltekssn.org/api/auth/isadmin", null);
 
 				response.EnsureSuccessStatusCode();
 
@@ -110,11 +105,6 @@ namespace ProjectApp
 				MessageBox.Show($"An unexpected error occurred: {ex.Message}");
 			}
 		}
-		private void listkey_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			// Handle item selection if needed
-		}
-
 		private async void buttonNew_Click(object sender, EventArgs e)
 		{
 			try
@@ -139,7 +129,7 @@ namespace ProjectApp
 				var values = new { label = label };
 				var content = new StringContent(JsonConvert.SerializeObject(values), Encoding.UTF8, "application/json");
 
-				HttpResponseMessage response = await client.PostAsync("https://localhost:8443/api/user/newkey", content);
+				HttpResponseMessage response = await client.PostAsync("https://app-api.korpstar-poltekssn.org/api/user/newkey", content);
 
 				if (response.IsSuccessStatusCode)
 				{
@@ -213,7 +203,7 @@ namespace ProjectApp
 				var values = new { label = label, privateKey = privateKey };
 				var content = new StringContent(JsonConvert.SerializeObject(values), Encoding.UTF8, "application/json");
 
-				HttpResponseMessage response = await client.PostAsync("https://localhost:8443/api/user/deletekey", content);
+				HttpResponseMessage response = await client.PostAsync("https://app-api.korpstar-poltekssn.org/api/user/deletekey", content);
 
 				if (response.IsSuccessStatusCode)
 				{
